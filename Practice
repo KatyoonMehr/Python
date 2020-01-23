@@ -1,4 +1,14 @@
-# Day 1 ##
+
+
+
+## Day 1 ##
+###########################
+
+x=17
+print type(x)
+
+
+
 x = 34 - 23
 y = "Hello"
 z= 3.45
@@ -9,8 +19,10 @@ if z ==3.45 or y == "Hello":
     print (y)
 
 
-# Day 2 ##
+## Day 2 ##
+###########################
 
+# if elif else    
 var= 'Panda'
 if var == "panda":
     print("cute!")
@@ -20,15 +32,15 @@ else:
     print("ugly ...")
     
  
-    temp = 120
-    if temp > 85:
-        print ("Hot")
-    elif temp > 100:
-        print ("really Hot!")
-    elif temp > 60:
-        print ("comfortable")
-    else:
-         print ("cold")
+temp = 120
+if temp > 85:
+    print ("Hot")
+elif temp > 100:
+    print ("really Hot!")
+elif temp > 60:
+    print ("comfortable")
+else:
+    print ("cold")
          
 str4="Hello, World"
 str4[1:8:2]
@@ -36,7 +48,10 @@ str4[2:5:3]
 str4[1:9:2]
 
 
-# Function 
+
+
+# Function
+ 
 def triple(num):
     print("starting to execute the function body.")
     return num*3
@@ -181,6 +196,10 @@ x.split(",")
 '|'.join(x)
 len(x. split(" "))
 
+t=(hi, me!)
+t.capitalize()
+
+
 
 'life of bryan' [:5]
 'life of bryan' [5:]
@@ -189,9 +208,11 @@ len(x. split(" "))
 A= "This is 'Milk'"
 B= 'This is "Milk"'
 C= "This is \"Milk\""
+D= "This is \'Milk\'"
 print(A)
 print(B)
 print(C)
+print(D)
 
 A="I want a linebreak \nbefore I continue."
 print(A)
@@ -203,8 +224,11 @@ print ('I want a tab\there')
 print ('I want a \\there')
 
 
+
 # Dealing with time
-from datetime import datetime, date, time, timedelta 
+from datetime import datetime, date, time, timedelta
+
+
 my_date=datetime(1999, 12, 31, 11, 59, 50)
 type(my_date)
 print(my_date)
@@ -217,11 +241,14 @@ my_date.minute
 my_date.second
 
 datetime.today()
+date.today()
+datetime.now()
+
 yet_another=datetime(2019, 1, 1)
 
 dtm='20130507@161218'
 dtm2='20130507@161218'
-dtm=datetime.strftime(dtm, "%Y%m%d@%H%M%S")
+dtm=datetime.strptime(dtm, "%Y%m%d@%H%M%S")
 print(dtm)
 print(type(dtm))
 dtm2=dtm2.strftime("%m/%d/%Y %H:%M") 
@@ -252,46 +279,6 @@ d1-d2
 datetime.timedelta(0,3600)
 
 
-t=(2,3,'eee')
-print(type(t))
-
-my_tuple=(1,3,5)
-my_tuple[1]=5
-print(my_tuple[1])
-other_t=('abc', 1, (2,1), 3.0)
-print(other_t[0][1])
-log_t=my_tuple+other_t
-print(log_t)
-print(len(log_t))
-
-
-t=1,2,3,4,2,4,1,4,3,2,1
-t.count(1)
-
-
-# List
-
-mylist=[]
-mylist.append(1)
-mylist.append(2)
-mylist[1]
-print(dir(list()))  
-mylist[1]=3
-print(mylist)
-mylist[0]
-mylist[10]
-
-# list of list
-
-random_stuff=[True, 3.14, ["Pie", "Pizza", "Automobile"]]
-battleship_board=[[1,1,0],[1,0,1],[0,0,1]]
-print(random_stuff[2])
-
-
-
-# Day 3 ##
-
-
 mymessydate = '2018:20:06:15:30:10'
 d1=datetime.strptime(mymessydate, "%Y:%d:%m:%H:%M:%S")
 d1
@@ -303,13 +290,73 @@ d3=datetime.strptime(mymessydate2, "%Y,%d, %m+%I%M%S%p")
 d3
 
 
+t=(2,3,'eee')
+print(type(t))
+
+my_tuple=(1,3,5)
+my_tuple[1]=5 # No item assignment is permitted. tuples are immutable
+print(my_tuple[1])
+other_t=('abc', 1, (2,1), 3.0)
+print(other_t[0][1])
+log_t=my_tuple+other_t
+print(log_t)
+print(len(log_t))
+
+
+t=1,2,3,4,2,4,1,4,3,2,1
+t.count(1)
+
+a, b= 2, 4
+print(a+b)
+
+
+6.0/5 == 6/4
+# False
+
+
+
+m=35
+f=17
+print('The number of boys are %m and girls are %f')%(m,f)
+
+print("you earn $ %d a %s" %(20000, 'year'))
+# you earn $ 20000 a year
+
+print('The number of boys and girls are %d and %d'%(m,f))
+# The number of boys and girls are 35 and 17
+
+
+
+
+
+# List
+mylist=[]
+mylist.append(1)
+mylist.append(2)
+mylist[1]
+print(dir(list()))  
+mylist[1]=3
+print(mylist)
+mylist[0]
+mylist[10]
+
+
+# list of list
+random_stuff=[True, 3.14, ["Pie", "Pizza", "Automobile"]]
+battleship_board=[[1,1,0],[1,0,1],[0,0,1]]
+print(random_stuff[2])
+
+
+
+## Day 3 ##
+######################
 my_list = ['green', 'red', 'blue']
 another_list = my_list
 my_list[0] = 'yellow'
 my_list.append('purple')
 my_list.insert (2, 'white')
 # For insert first put the index, append attach to the end
-
+my_list(sort)
 
 #sort()
 unordered_list = [1123, 15, 25, 500]
@@ -318,7 +365,6 @@ unordered_list.sort(reverse = True)
 
 
 # Loop
-
 new_list = ["Pie", "Pizza", "Spagetti", "Rice", "Kebab"]
 if "Kebab" in new_list:
     print ('I am hungry')
@@ -346,7 +392,6 @@ count=0
 for i in a:
     print ("My count is:", count)
     count=count+i
-    print("new count", count)
     
 i=0
 while i < len(a):
@@ -362,13 +407,6 @@ while add < 1650:
      i=i+1
 if add >= 1650:
      add = add - loop_list[i]
-     
-
-
-
-
-
-
 
 # Dictionary
 my_dic= {'name': 'kati', 'country': 'canada', 'job':'student', 'language':['english', 'farsi', 'french']}
@@ -386,6 +424,12 @@ my_dic.pop('height') # To delete an element from Dic
 
 
 ## Day 4 ##
+######################
+
+r=np.arange(2, 10, 2).tolist()
+myloop1=[r, "Goodbye!"]
+
+
 
 myloop1=[2, 4, 6, 8, 10, "Goodbye!"]
 i=0
@@ -393,7 +437,6 @@ while i< len(myloop1):
     print (myloop1[i])
     i=i+1
     
-
 for val in myloop1:
      print (val)
     
@@ -415,7 +458,6 @@ for i in range(end+1):
     print (add)    
     
 list(range(end+1))
-
 
 end=6
 add=0
@@ -464,6 +506,25 @@ out(30)
 
 # Chapter 7 - Numpy
 import numpy as np
+import pandas as pd
+
+
+# Missing Values
+
+y=np.array([1,0,np.NaN, 0, np.NaN, 0, 1, 1])
+z=np.isnan(y)
+print(z)
+s=z.sum() # total numberv of missings
+print(s)
+print(np.mean(z))
+print(np.mean(y))
+x=pd.Series(range(11, 18), index=range(1,8))
+t=x[::2]
+print(t)
+a=x.reindex[[2,1,12,3], fill_value=0)
+print(a)
+
+
 
 x=np.array([0,1,2,3])
 no_good=np.array(['pie', 3.14])
@@ -549,30 +610,35 @@ D4=np.append(D2, N)
 D4
 D4=D4.reshape(3, 5)
 
-# read an external file
 
-
-np.savetxt('pppp.csv', D2, delimiter=',')
-import os
-os.chdir('C:\\Users\\Administrator\\Desktop\\Python')
-os.getcwd()
-
-
-my_data=np.genfromtxt('PPP.csv', delimiter=',', skip_header=1)
-my_data
-
-
+#Question 6
 r=([0,1]*4 + [1,0]*4 )*4
 x=np.array(r).reshape(8,8)
 
 t1=np.array([1,0])
 
 
+# read an external file
+import os
+os.chdir('C:\\Users\\Administrator\\Desktop\\Python')
+os.getcwd()
+
+
+my_data=np.genfromtxt('PPP.txt', delimiter=',', skip_header=1)
+my_data
+
+# write an external file
+np.savetxt('pppp.csv', D2, delimiter=',')
+
+
+
 ## Day 5 ##
+###########################
 
 import numpy as np
 import pandas as pd
 import matplotlib.pylab as plt
+%matplotlib online
 import seaborn as sns
 
 my_array = np.array([10,11,12,13,14])
@@ -601,6 +667,7 @@ baseball.iloc[0:5, :3] # iloc works with number of columns and rows
 baseball.loc[0:10:2, ['Team', 'League']] # loc works with the name of columns
 baseball.loc[0:10:2] # same as baseball.loc[0:10:2, :]
 # every oder rows because of 2
+baseball.iloc[[1,3,6,111], 1:6] # just row # 1,3,6 & 111 and the first five columns
 baseball.sort_values(by= 'Year')
 baseball.sort_values(by= 'Year', ascending=False)[:5]
 
@@ -613,7 +680,51 @@ baseball.loc[(baseball.Team == "TOR") & (baseball.Year > 2010), 'Team' : 'W']
 baseball.loc[(baseball.Team == "TOR") | (baseball.Year > 2010), 'Team' : 'W']
 baseball.count() #To know where we have missing values
 
+baseball.loc[baseball.W>100 , 'Team']
 
+
+baseball.OBP.describe() #Summary statistics for variable OBP
+
+corrs = baseball.corr()
+plt.plot(figsize=(3,5))
+sns.heatmap(corrs, square=True)
+# plot.show()
+
+
+
+###################
+%matplotlib online
+import numpy as np from pylab import
+
+
+def de_mean(x):
+    xmean=mean(x)
+    return [xi - xmean for xi in x]
+def covariance(x,y):
+    n = len(x)
+    return dot(de_mean(x), de_mean(y))/(n-1)
+price = np.random.normal(9, 0.890, 3000)
+age = np.random.normal(11, 1.8, 3000)
+
+scatter(price, age)
+covariance (price, age)
+
+
+
+
+import matplotlib.pyplot as plt
+import pandas
+
+data = load_my_data()
+fig, ax = plt.subplots()
+data['Points'].value_counts().plot(ax=ax, kind='bar')
+
+
+
+
+
+
+# DataFrame
 names = ['Kati', 'Rayan', 'Leanna', 'Meloryna']
 country = ['Iran', 'Iran', 'Canada', 'Canada']
 year = [1978, 1976, 2016 , 2018]
@@ -622,3 +733,7 @@ color= ['White', 'Blue', 'Pink', 'Red']
 mydata=pd.DataFrame([country, year, color, names])
 mydata
 
+AC = pd.read_csv('african_crises.csv')
+AC.head()
+AC.describe()
+AC.isnull().any() #without any() it goes column by column
