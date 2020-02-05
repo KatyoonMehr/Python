@@ -1,0 +1,177 @@
+"""
+Created on Fri Jan 31 11:19:10 2020
+
+@author: Katayoon Mehr
+"""
+# Project : Autism
+
+import os
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+os.chdir("C:/Users/Administrator/Desktop/Python/Project")
+
+#os.chdir("C:/Users/Rayan/Desktop/Kati/PythonFile/Project")
+
+A = pd.read_csv('Autism.csv')
+
+# Question 1: Describe the data
+
+A.head()
+A.describe()
+A.columns
+A.info()
+
+A=A.rename(columns= {'age_at_scan':'age'})
+A=A.rename(columns= {'dsm_iv_tr':'stat'})
+A=A.rename(columns= {'adi_rrb_total_c' : 'test1'})
+A=A.rename(columns= {'ados_module' : 'test2'})
+A=A.rename(columns= {'ados_gotham_socaffect' : 'test3'})
+A=A.rename(columns= {'ados_gotham_rrb' : 'test4'})
+A=A.rename(columns= {'ados_gotham_total' : 'test5'})
+A=A.rename(columns= {'ados_gotham_severity' : 'test6'})
+
+A.age.describe()
+
+
+
+# Question 2: Average of age for two groups Autism and Control
+
+mean_A_C=A.groupby(['stat'])['age'].agg(np.mean).sort_values(ascending=False)
+mean_A_S=A.groupby(['sex'])['age'].agg(np.mean).sort_values(ascending=False)
+
+sns.boxplot(x=A.age)
+ax1=sns.boxplot(x=A.sex, y=A.age)
+ax2=sns.boxplot(x=A.stat, y=A.age)
+
+
+
+# Question 3: number of Males and Females in two groups Autism and Control
+
+count_A_C=A.groupby(['stat'])['age'].count()
+count_A_S=A.groupby(['sex'])['age'].count()
+
+
+pd.crosstab(A.stat, A.sex)
+
+
+
+# Question 4,5 : we have 3 methods (fiq, viq and piq) and each has 3 submethods.
+# Box plot and correlation of their result?
+
+A.fiq.describe()
+A.viq.describe()
+A.piq.describe()
+
+A.groupby(['fiq_test_type'])['fiq_test_type'].count()
+A.groupby(['viq_test_type'])['viq_test_type'].count()
+A.groupby(['piq_test_type'])['piq_test_type'].count()
+
+
+sns.boxplot(A.fiq, color='red')
+sns.boxplot(A.viq, color='green')
+sns.boxplot(A.piq, color='yellow')
+
+
+method=A.iloc[0:301, 5:8]
+method.plot(kind='box')
+# Or
+method.boxplot()
+
+
+fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+fig.suptitle('Horizontally stacked subplots')
+# How to put the t=3 graphs in a 1x3 panel?
+
+
+
+sns.boxplot(x="fiq_test_type", y="fiq", hue="sex", data=A, palette="Set1")
+sns.boxplot(x="viq_test_type", y="viq", hue="sex", data=A, palette="Set1")
+sns.boxplot(x="piq_test_type", y="piq", hue="sex", data=A, palette="Set1")
+
+
+# Correlation between methods values
+method.corr()
+sns.pairplot(method)
+
+
+# Question 6: number of patient using medication in each group?
+
+a=pd.crosstab(A.stat, A.current_med_status)
+a
+b=pd.crosstab([A.stat, A.sex], A.current_med_status,  margins=True)
+b
+
+
+
+# Question 7: what are the new values for total of behavorial tests?
+ 
+A['Social_b_t']=A.test1+A.test2+A.test3+A.test4+A.test5+A.test6
+
+g=A.groupby('stat')['test1', 'test2', 'test3', 'test4', 'test5', 'test6'].sum()
+g.reset_index(drop=False, inplace=True)
+g.columns
+g.plot('stat', ['test1', 
+                'test2', 
+                'test3', 
+                'test4', 
+                'test5', 
+                'test6'], 
+                 kind='bar', stacked=True)
+
+
+# A['Social_b_t']=A.adi_rrb_total_c+A.ados_module+A.ados_gotham_socaffect+\
+#                     A.ados_gotham_rrb+A.ados_gotham_total+A.ados_gotham_severity
+ 
+
+                   
+# Question 8: Comapre the new values with the past values, 
+# what is the average of gain in each group?             
+          
+A['Compare']=A.Social_b_t-A.PAST_adi_r_social_total_a
+
+plt.hist(A.Compare, color='pink')
+
+mean_gain=A.groupby(['stat'])['Compare'].agg(np.mean).sort_values(ascending=False)
+mean_gain
+
+
+# Question 9: Correlation between past test result and total current result for each group?
+
+cor=A['Social_b_t'].corr(A['PAST_adi_r_social_total_a'])
+A_A=A[A.stat=='Autism']
+cor_A=A_A['Social_b_t'].corr(A_A['PAST_adi_r_social_total_a'])
+A_C=A[A.stat=='Control']
+cor_C=A_C['Social_b_t'].corr(A_C['PAST_adi_r_social_total_a'])
+
+
+plt.scatter(A.Social_b_t, A.PAST_adi_r_social_total_a)
+
+sns.scatterplot(x='Social_b_t', y='PAST_adi_r_social_total_a', hue='sex', data=A)
+sns.scatterplot(x='Social_b_t', y='PAST_adi_r_social_total_a', hue='sex', data=A_A)
+sns.scatterplot(x='Social_b_t', y='PAST_adi_r_social_total_a', hue='sex', data=A_C)
+
+
+
+# Question 10: range age and gain based on each age range
+
+bins = [0, 11, 21, 31, 41, 120]
+labels = ['0-10', '11-20', '21-30', '31-40', '41+']
+A['agerange'] = pd.cut(A.age, bins, labels = labels, include_lowest = True)
+
+mean_age_gain=A.groupby(['agerange'])['Compare'].agg(np.mean).sort_values(ascending=False)
+
+
+
+
+plt.hist(A.loc[A.agerange=='0-10', 'Compare'], alpha=0.8, color='red', label="0-10 yrs")
+plt.hist(A.loc[A.agerange=='11-20', 'Compare'], alpha=0.8, color='blue', label="11-20 yrs")
+plt.hist(A.loc[A.agerange=='21-30', 'Compare'], alpha=0.8, color='green', label="21-30 yrs")
+plt.hist(A.loc[A.agerange=='31-40', 'Compare'], alpha=0.8, color='orange', label="31-40 yrs")
+plt.hist(A.loc[A.agerange=='41+', 'Compare'], alpha=0.8, color='purple', label="41+ yrs")
+plt.xlabel('Gain after application of methods')
+plt.ylabel('Frequency')
+plt.title('Gain in tests result\n after methods application')
